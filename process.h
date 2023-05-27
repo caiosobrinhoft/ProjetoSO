@@ -10,6 +10,7 @@ typedef struct {
 } process_t;
 
 process_t* processCreate(int id, const char *name);
-void processInterrupt(int id);
+void processInterrupt(process_t *process);
+void processFinish(process_t *process);
 
 #endif
