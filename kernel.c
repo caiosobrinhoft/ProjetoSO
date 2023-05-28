@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "kernel.h"
 #include "process.h"
 
@@ -9,7 +10,7 @@ void sysCall(kernelFunctions func, process_t *process){
         processInterrup(process);
         break;
     case PROCESS_CREATE:
-        processCreate();
+        //processCreate();
         break;
     case PROCESS_FINISH:
         processFinish(process);
