@@ -3,7 +3,7 @@
 
 #define MAX_PROCESS_NAME 50
 
-typedef struct {
+typedef struct{
     char name[MAX_PROCESS_NAME];
     int id;
     int remainingTime;

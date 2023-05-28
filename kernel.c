@@ -2,18 +2,19 @@
 
 #include "kernel.h"
 #include "process.h"
+#include "memory.h"
 
-void sysCall(kernelFunctions func, process_t *process){
+void sysCall(kernelFunctions func){
     switch (func)
     {
     case PROCESS_INTERRUPT:
-        processInterrup(process);
+        //processInterrup();
         break;
     case PROCESS_CREATE:
         //processCreate();
         break;
     case PROCESS_FINISH:
-        processFinish(process);
+        //processFinish();
         break;
     case MEM_LOAD_REQ:
         //memoryLoadReq();

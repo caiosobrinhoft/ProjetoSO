@@ -1,0 +1,2 @@
+void mainMenu();
+void clearScreen();

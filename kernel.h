@@ -14,6 +14,6 @@ typedef enum{
     SEMAPHORE_V = 11,
 } kernelFunctions;
 
-void sysCall(kernelFunctions func, process_t *process);
+void sysCall(kernelFunctions func);
 
 #endif 
