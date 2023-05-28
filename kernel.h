@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef KERNEL_H
 
 #include <stdio.h>
@@ -16,4 +17,24 @@ typedef enum{
 
 void sysCall(kernelFunctions func);
 
+=======
+#ifndef KERNEL_H
+
+#include <stdio.h>
+
+typedef enum{
+    PROCESS_INTERRUPT = 1,
+    PROCESS_CREATE = 2,
+    PROCESS_FINISH = 3,
+
+    MEM_LOAD_REQ = 6,
+    MEM_LOAD_FINISH = 7,
+
+    SEMAPHORE_P = 10,
+    SEMAPHORE_V = 11,
+} kernelFunctions;
+
+void sysCall(kernelFunctions func, process_t *process);
+
+>>>>>>> 2c0af9f5d5ab43bb3d9eeab5078a603ab9476c57
 #endif 
