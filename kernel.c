@@ -1,33 +1,59 @@
-<<<<<<< HEAD
 #include <stdio.h>
 
 #include "kernel.h"
 #include "process.h"
 #include "memory.h"
+#include "semaphore.h"
+#include "srtf.h"
+/*
 
-void sysCall(kernelFunctions func){
+1 - alocar segmento
+2 - free segmento
+3 - translateVirtualToPhysical
+4 - criar um processo
+5 - Carregar dados do processo usando memLoadReq
+6 - usar memLoadFinish
+7 - process interrupt
+8 - implementar os semaforos
+9 - finalizar os processos
+professor tentamo mas nao deu!
+que treco dificil
+deus abensoe
+
+
+*/
+#define MAX_PROCESSES 100
+process_t* processList[MAX_PROCESSES];
+int numProcesses = 0;
+
+int value = 1;
+int *semaphore = &value;
+
+void sysCall(kernelFunctions func, process_t *process, segment *segment){
     switch (func)
     {
     case PROCESS_INTERRUPT:
-        //processInterrup();
+        processInterrupt(processList[numProcesses]);
         break;
     case PROCESS_CREATE:
-        //processCreate();
+        process = processCreate(process->id, process->name);
+        processList[numProcesses] = process;
+        numProcesses++;
         break;
     case PROCESS_FINISH:
-        //processFinish();
+        processFinish(processList[numProcesses]);
         break;
     case MEM_LOAD_REQ:
-        //memoryLoadReq();
+        memLoadReq(process->id, segment->size);
         break;
     case MEM_LOAD_FINISH:
-        //memoryLoadFinish();
+        memLoadFinish(process->id);
         break;
     case SEMAPHORE_P:
-        //semaphoreP();
+        P(semaphore);
         break;
     case SEMAPHORE_V:
-        //semaphoreV();
+        V(semaphore);
         break;
     default:
         break;
@@ -38,54 +64,9 @@ void interruptControl(kernelFunctions func, process_t *process){
     switch (func)
     {
     case MEM_LOAD_FINISH:
-        
+        memLoadFinish(process->id);
         break;
     default:
         break;
     }
-=======
-#include <stdio.h>
-
-#include "kernel.h"
-#include "process.h"
-
-void sysCall(kernelFunctions func, process_t *process){
-    switch (func)
-    {
-    case PROCESS_INTERRUPT:
-        processInterrup(process);
-        break;
-    case PROCESS_CREATE:
-        //processCreate();
-        break;
-    case PROCESS_FINISH:
-        processFinish(process);
-        break;
-    case MEM_LOAD_REQ:
-        //memoryLoadReq();
-        break;
-    case MEM_LOAD_FINISH:
-        //memoryLoadFinish();
-        break;
-    case SEMAPHORE_P:
-        //semaphoreP();
-        break;
-    case SEMAPHORE_V:
-        //semaphoreV();
-        break;
-    default:
-        break;
-    }
-}
-
-void interruptControl(kernelFunctions func, process_t *process){
-    switch (func)
-    {
-    case MEM_LOAD_FINISH:
-        
-        break;
-    default:
-        break;
-    }
->>>>>>> 2c0af9f5d5ab43bb3d9eeab5078a603ab9476c57
 }

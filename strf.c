@@ -3,7 +3,7 @@
 #include <string.h>
 #include "srtf.h"
 
-void srtf(struct Processo processos[], int num_processos) {
+void srtf(Processo processos[], int num_processos) {
     int tempo_total = 0;
     int processos_concluidos = 0;
     int processo_atual = -1;
