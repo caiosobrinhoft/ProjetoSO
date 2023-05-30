@@ -8,7 +8,6 @@ void getProcess()
 {
     FILE *file;
     char fileName[100];
-    char text[100];
 
     printf("Digite o nome do arquivo: ");
     fgets(fileName, 100, stdin);
@@ -33,8 +32,8 @@ void getProcess()
     const char *name;
 
     // Le o header do arquivo
-    scanf("%d", &id);
     scanf("%s", &name);
+    scanf("%d", &id);
 
     processCreate(id, name);
 
