@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "process.h"
 
 // Funcao para limpar tela
 void clearScreen(){
@@ -37,7 +38,7 @@ void mainMenu()
             break;
         case 1:
             printf("\nOPCAO 1 ESCOLHIDA.\n\n");
-            // createProcess();
+            getProcess();
             break;
         case 2:
             printf("\nOPCAO 2 ESCOLHIDA.\n\n");

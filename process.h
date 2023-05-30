@@ -12,6 +12,7 @@ typedef struct Process{
     struct Process *new;
 } process_t;
 
+void getProcess();
 process_t* processCreate(int id, const char *name);
 void processInterrupt(process_t *process);
 void processFinish(process_t *process);
