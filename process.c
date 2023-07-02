@@ -4,40 +4,45 @@
 
 #include "process.h"
 
-void getProcess()
+// Função para ler um programa sintético a partir de um arquivo
+process_t *ler_programa_sintetico(char *nome_arquivo)
 {
-    FILE *file;
-    char fileName[100];
-
-    printf("Digite o nome do arquivo: ");
-    fgets(fileName, 100, stdin);
-
-    // Removendo o caractere de nova linha ('\n') da string
-    int size = strlen(fileName);
-    if (fileName[size - 1] == '\n')
-    {
-        fileName[size - 1] = '\0';
+    FILE *arquivo = fopen(nome_arquivo, "r"); // Abre o arquivo para leitura
+    if (arquivo == NULL)
+    { // Verifica se houve erro ao abrir o arquivo
+        printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
+        return NULL;
     }
 
-    // Abrir o arquivo para leitura
-    file = fopen(fileName, "r");
+    process_t *programa = malloc(sizeof(process_t)); // Aloca memória para armazenar o programa sintético
 
-    if (file == NULL)
+    // Lê os dados do cabeçalho do arquivo
+    fscanf(arquivo, "%s %d %d %d", programa->name, &programa->id_segmento, &programa->prioridade_original, &programa->tamanho_segmento);
+
+    // Lê a lista de semáforos usados pelo programa
+    programa->num_semaforos = 0;
+    while (1)
     {
-        printf("Erro ao abrir o arquivo.\n");
-        return 1;
+        int semaforo;
+        if (fscanf(arquivo, "%d", &semaforo) != 1)
+            break;                                                                     // Lê um semáforo do arquivo e verifica se a leitura foi bem sucedida
+        programa->semaforos[programa->num_semaforos++] = semaforo; // Armazena o semáforo lido na lista de semáforos e incrementa o contador de semáforos
     }
 
-    int id;
-    const char *name;
+    // Lê a lista de comandos do programa
+    programa->num_comandos = 0;
+    programa->comandos = NULL;
+    char comando[100];
+    while (fgets(comando, 100, arquivo) != NULL)
+    {                                                                                                    // Lê um comando do arquivo e verifica se a leitura foi bem sucedida
+        programa->comandos = realloc(programa->comandos, (programa->num_comandos + 1) * sizeof(char *)); // Realoca memória para armazenar mais um comando na lista de comandos
+        programa->comandos[programa->num_comandos] = strdup(comando);                                    // Armazena o comando lido na lista de comandos e incrementa o contador de comandos
+        programa->num_comandos++;
+    }
 
-    // Le o header do arquivo
-    scanf("%s", &name);
-    scanf("%d", &id);
+    fclose(arquivo); // Fecha o arquivo
 
-    processCreate(id, name);
-
-    fclose(file);
+    return programa; // Retorna o ponteiro para a estrutura que contém o programa sintético lido
 }
 
 process_t *processCreate(int id, const char *name)

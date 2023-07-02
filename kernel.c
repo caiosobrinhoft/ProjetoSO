@@ -5,23 +5,7 @@
 #include "memory.h"
 #include "semaphore.h"
 #include "srtf.h"
-/*
 
-1 - alocar segmento
-2 - free segmento
-3 - translateVirtualToPhysical
-4 - criar um processo
-5 - Carregar dados do processo usando memLoadReq
-6 - usar memLoadFinish
-7 - process interrupt
-8 - implementar os semaforos
-9 - finalizar os processos
-professor tentamo mas nao deu!
-que treco dificil
-deus abensoe
-
-
-*/
 #define MAX_PROCESSES 100
 process_t* processList[MAX_PROCESSES];
 int numProcesses = 0;

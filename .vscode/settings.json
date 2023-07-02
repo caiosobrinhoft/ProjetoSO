@@ -5,6 +5,7 @@
         "semaphore.h": "c",
         "stdio.h": "c",
         "string.h": "c",
-        "kernel.h": "c"
+        "kernel.h": "c",
+        "disk.h": "c"
     }
 }
